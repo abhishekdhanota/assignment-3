@@ -21,3 +21,8 @@ textarea {
     background-color: #777;
     border-color: #fff
 }
+div#container {
+    background: antiquewhite;
+    padding: 10px 20px;
+    margin: 0px 10px;
+}

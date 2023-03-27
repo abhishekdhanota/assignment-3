@@ -2,11 +2,46 @@
 @{
     ViewBag.Title = "List";
 }
+<style>
+    label {
+        font-size: 20px;
+        background: gray;
+        padding: 10px;
+        height: 50px;
+        border-radius: 10px;
+    }
 
-<h2>List</h2>
-<p>This page is showing information about  all teachers</p>
-<div id="containerlist">
-    <h2>List of Authors</h2>
+    input[type="text"] {
+        padding: 10px;
+        width: 100%;
+        height: 50px;
+        border-radius: 10px;
+    }
+
+    input[type="submit"] {
+        padding: 10px;
+        height: 50px;
+        background: gray;
+        border-radius: 10px;
+        width: 100px;
+        /* margin-left: 10px; */
+    }
+    h1 {
+        text-align: center;
+    }
+    </style>
+
+<div id="container">
+    <h1>List of Teachers</h1>
+    <form method="get" action="/Teacher/List/Searchkey">
+        <label for="search">Search Teachers:</label>
+        <input name="Searchkey" type="text" placeholder="Name or employee no...">
+        <input type="submit" value="Search">
+    </form>
+    <h3>There are @Model.Count() teachers. </h3>
+    <a class="navlink" href="/Teacher/List">Home</a>
+</div>
+<div>
 @foreach (var teacher in Model)
 {
     <div class="list-group-item row">

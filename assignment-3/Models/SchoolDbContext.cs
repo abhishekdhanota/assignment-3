@@ -33,8 +33,8 @@ namespace assignment_3.Models
         /// Returns a connection to the blog database.
         /// </summary>
         /// <example>
-        /// private SchoolDbContext School = new SchoolDbContext();
-        /// MySqlConnection Conn = School.AccessDatabase();
+        /// private TeacherDbContext School = new TeacherDbContext();
+        /// MySqlConnection Conn = Teacher.AccessDatabase();
         /// </example>
         /// <returns>A MySqlConnection Object</returns>
         public MySqlConnection AccessDatabase()

@@ -16,10 +16,10 @@ namespace assignment_3.Controllers
         }
 
         //GET :/Teacher/List
-        public ActionResult List() 
+        public ActionResult List(string SearchKey) 
         {
             TeacherDataController controller = new TeacherDataController();
-            IEnumerable<Teacher>Teacher=controller.ListTeachers(); 
+            IEnumerable<Teacher>Teacher=controller.ListTeachers(SearchKey); 
             return View(Teacher);
         }
         //GET :/Teacher/Show/{id}
