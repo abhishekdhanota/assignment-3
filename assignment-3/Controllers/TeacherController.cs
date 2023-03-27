@@ -6,7 +6,11 @@ using System.Web.Mvc;
 using assignment_3.Models;
 
 namespace assignment_3.Controllers
-{
+{/// <summary>
+/// this controller contains three clases 
+/// list class will access the list of teachers
+/// while the show class will display alll the attributes of a teacher 
+/// </summary>
     public class TeacherController : Controller
     {
         // GET: Teacher
