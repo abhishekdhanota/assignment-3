@@ -50,7 +50,7 @@ namespace assignment_3.Controllers
             while (ResultSet.Read())
             {
                 //Access Column information by the DB column name as an index
-                int studentId = (int)ResultSet["studentid"];
+                int studentId = Convert.ToInt32(ResultSet["studentid"]);
                 string studentfname = ResultSet["studentfname"].ToString();
                 string studentlname = ResultSet["studentlname"].ToString();
                 string studentno = ResultSet["studentnumber"].ToString();
@@ -96,15 +96,14 @@ namespace assignment_3.Controllers
 
             while (ResultSet.Read())
             {
-               
 
-                int StudentId = (int)ResultSet["studentid"];
+                int studentId = Convert.ToInt32(ResultSet["studentid"]);
                 string studentfname = ResultSet["studentfname"].ToString();
                 string studentlname = ResultSet["studentlname"].ToString();
                 string studentno = ResultSet["studentnumber"].ToString();
                 string enroldate = ResultSet["enroldate"].ToString();
 
-                NewStudent.studentId = StudentId;
+                NewStudent.studentId = studentId;
                 NewStudent.studentfname = studentfname;
                 NewStudent.studentlname = studentfname;
                 NewStudent.studentno = studentno;
