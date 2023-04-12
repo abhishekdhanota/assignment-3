@@ -32,6 +32,9 @@
     </style>
 
 <div id="container">
+    <nav>
+        <a class="navlink" href="/Teacher/New">Add New Teacher</a>
+    </nav>
     <h1>List of Teachers</h1>
     <form method="get" action="/Teacher/List/Searchkey">
         <label for="search">Search Teachers:</label>
@@ -45,7 +48,7 @@
 @foreach (var teacher in Model)
 {
     <div class="list-group-item row">
-    <div class="col-md-12"><a href="/Teacher/Show/@teacher.TeacherId">@teacher.TeacherFname@teacher.TeacherLname</a></div>
+    <div class="col-md-12"><a href="/Teacher/Show/@teacher.TeacherId">@teacher.TeacherFname @teacher.TeacherLname</a></div>
         </div>
 }
    </div>

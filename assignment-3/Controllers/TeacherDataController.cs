@@ -142,6 +142,32 @@ namespace assignment_3.Controllers
         
             Conn.Close();
         }
+        [HttpPost]
+        public void AddTeacher(Teacher NewTeacher)
+        {
+            //Create an instance of a connection
+            MySqlConnection Conn = School.AccessDatabase();
+
+            //Open the connection between the web server and database
+            Conn.Open();
+
+            //Establish a new command (query) for our database
+            MySqlCommand cmd = Conn.CreateCommand();
+
+            //SQL QUERY
+            cmd.CommandText = "insert into teachers(teacherfname,teacherlname,employeenumber,hiredate,salary) values(@TeacherFname,@TeacherLname,@EmployeeNumber,CURRENT_DATE(),@Salary)";
+            cmd.Parameters.AddWithValue("@TeacherFname", NewTeacher.TeacherFname);
+            cmd.Parameters.AddWithValue("@TeacherLname", NewTeacher.TeacherLname);
+            cmd.Parameters.AddWithValue("@Salary", NewTeacher.Salary);
+            cmd.Parameters.AddWithValue("@EmployeeNumber", NewTeacher.EmployeNo);
+
+            cmd.Prepare();
+            cmd.ExecuteNonQuery();
+
+            Conn.Close();
+        }
+
+
     }
 }
 

@@ -4,6 +4,9 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using assignment_3.Models;
+using System.Diagnostics;
+using Google.Protobuf.WellKnownTypes;
+using Mysqlx.Datatypes;
 
 namespace assignment_3.Controllers
 {/// <summary>
@@ -47,12 +50,39 @@ namespace assignment_3.Controllers
         }
 
         //POST :/Teacher/Delete/{id}
-        public ActionResult Delete(int id)
+        public
+            ActionResult Delete(int id)
         {
             TeacherDataController controller = new TeacherDataController();
             controller.DeleteTeacher(id);
             return RedirectToAction("list");
         }
 
+        //GET :Teacher/New
+        public ActionResult New()
+        {
+            return View();
+        }
+        //POST : /Teacher/Create
+        [HttpPost]
+        public ActionResult Create(string TeacherFname,string TeacherLname,string Salary,string EmployeeNumber)
+        {
+            Debug.WriteLine("i have accessed the create method");
+            Debug.WriteLine(    TeacherFname);
+            Debug.WriteLine(    TeacherLname);
+
+
+            Teacher NewTeacher = new Teacher();
+            NewTeacher.TeacherFname = TeacherFname;
+            NewTeacher.TeacherLname = TeacherLname;
+            NewTeacher.EmployeNo = EmployeeNumber;
+            NewTeacher.Salary = Salary;
+
+
+            TeacherDataController controller = new TeacherDataController();
+            controller.AddTeacher(NewTeacher);
+
+            return RedirectToAction("List");
+        }
     }
 }
