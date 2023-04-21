@@ -23,19 +23,19 @@ namespace assignment_3.Controllers
         }
 
         //GET :/Teacher/List
-        public ActionResult List(string SearchKey) 
+        public ActionResult List(string SearchKey)
         {
             TeacherDataController controller = new TeacherDataController();
-            IEnumerable<Teacher>Teacher=controller.ListTeachers(SearchKey); 
+            IEnumerable<Teacher> Teacher = controller.ListTeachers(SearchKey);
             return View(Teacher);
         }
         //GET :/Teacher/Show/{id}
         public ActionResult Show(int id)
         {
-            TeacherDataController controller=new TeacherDataController();
-            Teacher NewTeacher= controller.FindTeacher(id);
-          
-            return View(NewTeacher);
+            TeacherDataController controller = new TeacherDataController();
+            Teacher SelectedTeacher = controller.FindTeacher(id);
+
+            return View(SelectedTeacher);
         }
 
 
@@ -65,11 +65,11 @@ namespace assignment_3.Controllers
         }
         //POST : /Teacher/Create
         [HttpPost]
-        public ActionResult Create(string TeacherFname,string TeacherLname,string Salary,string EmployeeNumber)
+        public ActionResult Create(string TeacherFname, string TeacherLname, string Salary, string EmployeeNumber)
         {
             Debug.WriteLine("i have accessed the create method");
-            Debug.WriteLine(    TeacherFname);
-            Debug.WriteLine(    TeacherLname);
+            Debug.WriteLine(TeacherFname);
+            Debug.WriteLine(TeacherLname);
 
 
             Teacher NewTeacher = new Teacher();
@@ -83,6 +83,53 @@ namespace assignment_3.Controllers
             controller.AddTeacher(NewTeacher);
 
             return RedirectToAction("List");
+        }
+        //get: /Author/update/{id}
+        public ActionResult Update(int id)
+        {
+            TeacherDataController controller = new TeacherDataController();
+            Teacher SelectedTeacher = controller.FindTeacher(id);
+            return View(SelectedTeacher);
+        }
+
+
+
+        /// <summary>
+        /// this is a post request used to update the actual
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="TeacherFname"></param>
+        /// <param name="TeacherLname"></param>
+        /// <param name="Salary"></param>
+        /// <param name="EmployeeNumber"></param>
+        /// <returns></returns>
+        /// <example>
+        /// POST : /Author/Update/10
+        /// FORM DATA / POST DATA / REQUEST BODY 
+        /// {
+        ///	"AuthorFname":"Christine",
+        ///	"AuthorLname":"Bittle",
+        ///	"AuthorBio":"Loves Coding!",
+        ///	"AuthorEmail":"christine@test.ca"
+        /// }
+        /// </example>
+        //POST:/Teacher/Update/{id}
+        [HttpPost]
+        public ActionResult Update(int id,string TeacherFname, string TeacherLname, string Salary, string EmployeeNumber)
+        {
+
+            Teacher TeacherInfo = new Teacher();
+            TeacherInfo.TeacherFname = TeacherFname;
+            TeacherInfo.TeacherLname = TeacherLname;
+            TeacherInfo.EmployeNo = EmployeeNumber;
+            TeacherInfo.Salary = Salary;
+            TeacherInfo.TeacherId = id;
+
+
+            TeacherDataController controller = new TeacherDataController();
+            controller.UpdateTeacher(id,TeacherInfo);
+
+            return RedirectToAction("Show/" + id);
         }
     }
 }

@@ -2,12 +2,11 @@
 @{
     ViewBag.Title = "Show";
 }
-
 <div id="containershow">
     <nav>
         <a class="navlink" href="/Teacher/List">Back to Teachers</a>
         <a class="dellink" href="/Teacher/DeleteConfirm/@Model.TeacherId">Delete</a>
-
+        <a  class="navlink"href="/Teacher/Update/@Model.TeacherId">Update</a>
     </nav>
     <h2>@Model.TeacherFname @Model.TeacherLname</h2>
     <p> Employee Number - @Model.EmployeNo</p>
@@ -17,13 +16,13 @@
 <style>
     .navlink {
         float: left;
+        margin:10px;
     }
-
     .dellink {
         color:red;
         float: right;
+        margin:10px;
     }
-
     nav {
         overflow: hidden;
         margin-bottom: 30px;

@@ -142,7 +142,7 @@ namespace assignment_3.Controllers
         
             Conn.Close();
         }
-        [HttpPost]
+        
         public void AddTeacher(Teacher NewTeacher)
         {
             //Create an instance of a connection
@@ -166,8 +166,46 @@ namespace assignment_3.Controllers
 
             Conn.Close();
         }
+        /// <summary>
+        /// Adds an Teacher to the MySQL Database. Non-Deterministic.
+        /// </summary>
+        /// <param name="NewTeacher">An object with fields that map to the columns of the teacher's table. </param>
+        /// <example>
+        /// POST api/TeacherData/AddAuthor 
+        /// FORM DATA / POST DATA / REQUEST BODY 
+        /// {
+        ///	"AuthorFname":"Christine",
+        ///	"AuthorLname":"Bittle",
+        ///	"AuthorBio":"Likes Coding!",
+        ///	"AuthorEmail":"christine@test.ca"
+        /// 
+        [HttpPost]
+        public void UpdateTeacher(int id,[FromBody]Teacher TeacherInfo)
 
+        {
+            //Create an instance of a connection
+            MySqlConnection Conn = School.AccessDatabase();
+            //Open the connection between the web server and database
+            Conn.Open();
 
+            //Establish a new command (query) for our database
+            MySqlCommand cmd = Conn.CreateCommand();
+
+            //SQL QUERY
+            cmd.CommandText = "update teachers set teacherfname=@TeacherFname,teacherlname=@TeacherLname,employeenumber=@EmployeeNumber,salary=@Salary where teacherid=@TeacherId";
+            cmd.Parameters.AddWithValue("@TeacherFname", TeacherInfo.TeacherFname);
+            cmd.Parameters.AddWithValue("@TeacherLname", TeacherInfo.TeacherLname);
+            cmd.Parameters.AddWithValue("@Salary", TeacherInfo.Salary);
+            cmd.Parameters.AddWithValue("@EmployeeNumber", TeacherInfo.EmployeNo);
+            cmd.Parameters.AddWithValue("@TeacherId", id);
+
+            cmd.Prepare();
+
+            cmd.ExecuteNonQuery();
+
+            Conn.Close();
+        
+        }
     }
 }
 
